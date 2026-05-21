@@ -5,3 +5,4 @@ TestResults/
 .vscode/
 *.user
 .sisyphus/
+.DS_Store
