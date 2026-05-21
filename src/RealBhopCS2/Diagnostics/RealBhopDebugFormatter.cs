@@ -7,14 +7,17 @@ namespace RealBhopCS2.Diagnostics;
 
 public static class RealBhopDebugFormatter
 {
-    public static string FormatStatus(RealBhopConfig config, int trackedPlayers)
+    public static string FormatStatus(RealBhopRuntimeConfig runtimeConfig, int trackedPlayers)
     {
+        var config = runtimeConfig.Config;
+
         return string.Join(
             "\n",
             $"RealBhop: enabled={config.Enabled}",
             $"MaxBhopTicks={config.MaxBhopTicks}",
             $"FramePenalty={config.FramePenalty.ToString("0.###", CultureInfo.InvariantCulture)}",
-            $"Debug={config.Debug}",
+            $"Debug={runtimeConfig.EffectiveDebug}",
+            $"ConfigDebug={config.Debug}",
             $"PlayersTracked={trackedPlayers}");
     }
 

@@ -1,6 +1,8 @@
+using CounterStrikeSharp.API.Core;
+
 namespace RealBhopCS2.Config;
 
-public sealed class RealBhopConfig
+public sealed class RealBhopConfig : BasePluginConfig
 {
     public bool Enabled { get; set; } = true;
 

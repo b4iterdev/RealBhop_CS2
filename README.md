@@ -24,7 +24,11 @@ dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --outp
 Copy the contents of `artifacts/RealBhopCS2/publish` into the CounterStrikeSharp plugins directory.
 
 # Configuration
-Configuration lives in the plugin config file and defaults mirror sm_realbhop behavior. The important fields are:
+Configuration lives in CounterStrikeSharp's plugin config file and defaults mirror sm_realbhop behavior. On first load, CounterStrikeSharp generates the config under:
+
+`csgo/addons/counterstrikesharp/configs/plugins/RealBhopCS2/RealBhopCS2.json`
+
+After editing the file, run `css_realbhop_reload` to reload RealBhop settings without recompiling the plugin. The important fields are:
 
 - `Enabled` — master on/off switch.
 - `MaxBhopTicks` — max ground ticks after landing where correction can still apply (sm_realbhop’s maxbhopframes).
@@ -37,6 +41,13 @@ Configuration lives in the plugin config file and defaults mirror sm_realbhop be
 - `ExperimentalAirAccelerate` — optional HL1-style air accelerate model.
 - `Hl1AirAccelerate` — air acceleration strength when experimental mode is enabled.
 - `Hl1MaxSpeed` — max speed target for experimental HL1 air accelerate.
+
+Runtime commands:
+
+- `css_realbhop_status` — print the loaded runtime settings and tracked-player count.
+- `css_realbhop_reload` — reload settings from the CounterStrikeSharp config file.
+- `css_realbhop_debug` — temporarily toggle debug output in memory. This command does **not** update the config file.
+- `css_realbhop_reset` — reset per-player movement tracking state.
 
 # How does it work ?
 This plugin mirrors sm_realbhop’s HL1/Quake-style speed preservation. It records the last air-frame velocity before landing, then on the second air frame after a short ground touch it applies a correction toward that speed. Late jumps receive a penalty via `FramePenalty`, and after `MaxBhopTicks` no correction is applied.
