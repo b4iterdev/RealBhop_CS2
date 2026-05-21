@@ -7,20 +7,21 @@ This plugins is an reimplementation of SeriTools's RealBhop plugins for Counter-
 This plugin requires [CounterStrikeSharp](https://github.com/roflmuffin/CounterStrikeSharp) installed. If you haven't install CounterStrikeSharp, head to [here](https://docs.cssharp.dev/docs/guides/getting-started.html)
 
 1. Download the latest [release](https://github.com/b4iterdev/RealBhop_CS2/releases) asset from the GitHub Releases page.
-2. Copy the extracted plugin folder into:
+2. Create the plugin folder if it does not exist:
 
    `addons/counterstrikesharp/plugins/RealBhopCS2`
 
-3. Restart the server.
-4. Verify it loaded with `css_realbhop_status` command.
+3. Copy the extracted release files into that folder.
+4. Restart the server.
+5. Verify it loaded with `css_realbhop_status` command.
 
 To build from source instead of using releases:
 
 ```bash
-dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --output artifacts/RealBhopCS2
+dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --output artifacts/RealBhopCS2/publish
 ```
 
-Copy `artifacts/RealBhopCS2` into the CounterStrikeSharp plugins directory.
+Copy the contents of `artifacts/RealBhopCS2/publish` into the CounterStrikeSharp plugins directory.
 
 # Configuration
 Configuration lives in the plugin config file and defaults mirror sm_realbhop behavior. The important fields are:
