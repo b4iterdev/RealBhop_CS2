@@ -10,6 +10,8 @@ public sealed class PlayerBhopState
 
     public MovementVector LastAirVelocity { get; set; }
 
+    public bool HasLastAirVelocity { get; set; }
+
     public MovementVector LastGroundVelocity { get; set; }
 
     public bool InTriggerPush { get; set; }
@@ -24,6 +26,7 @@ public sealed class PlayerBhopState
         AfterJumpFrame = false;
         GroundTicks = 0;
         LastAirVelocity = default;
+        HasLastAirVelocity = false;
         LastGroundVelocity = default;
         InTriggerPush = false;
         LastButtons = 0;

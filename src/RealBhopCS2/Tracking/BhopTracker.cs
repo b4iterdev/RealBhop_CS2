@@ -54,6 +54,11 @@ public sealed class BhopTracker
 
             if (state.GroundTicks <= _config.MaxBhopTicks)
             {
+                if (!state.HasLastAirVelocity)
+                {
+                    return BhopTickResult.None("NoPreviousAirVelocity");
+                }
+
                 var correction = BhopPhysics.CalculateCorrection(
                     state.LastAirVelocity,
                     snapshot.Velocity,
@@ -76,6 +81,7 @@ public sealed class BhopTracker
         }
 
         state.LastAirVelocity = snapshot.Velocity;
+        state.HasLastAirVelocity = true;
         return BhopTickResult.None("Airborne");
     }
 }
