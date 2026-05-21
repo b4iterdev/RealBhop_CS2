@@ -9,7 +9,7 @@ on:
       - published
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -35,3 +35,25 @@ jobs:
 
       - name: Test
         run: dotnet test RealBhopCS2.sln --configuration Release --no-build
+
+      - name: Publish plugin
+        run: dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --no-build --output artifacts/RealBhopCS2
+
+      - name: Package plugin
+        run: |
+          cd artifacts
+          zip -r RealBhopCS2-${{ github.sha }}.zip RealBhopCS2
+
+      - name: Upload dev build artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: RealBhopCS2-${{ github.sha }}
+          path: artifacts/RealBhopCS2-${{ github.sha }}.zip
+          if-no-files-found: error
+
+      - name: Upload release asset
+        if: github.event_name == 'release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "${{ github.event.release.tag_name }}" "artifacts/RealBhopCS2-${{ github.sha }}.zip" --clobber
