@@ -37,7 +37,7 @@ jobs:
         run: dotnet test RealBhopCS2.sln --configuration Release --no-build
 
       - name: Publish plugin
-        run: dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --no-build --output artifacts/RealBhopCS2
+        run: dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --no-build --output artifacts/RealBhopCS2/publish
 
       - name: Package plugin
         run: |
