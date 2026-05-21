@@ -39,10 +39,18 @@ jobs:
       - name: Publish plugin
         run: dotnet publish src/RealBhopCS2/RealBhopCS2.csproj --configuration Release --no-build --output artifacts/RealBhopCS2/publish
 
+      - name: Package plugin (lean)
+        run: |
+          rm -rf artifacts/RealBhopCS2/package
+          mkdir -p artifacts/RealBhopCS2/package
+          cp artifacts/RealBhopCS2/publish/RealBhopCS2.dll artifacts/RealBhopCS2/package/
+          if [ -f artifacts/RealBhopCS2/publish/RealBhopCS2.deps.json ]; then cp artifacts/RealBhopCS2/publish/RealBhopCS2.deps.json artifacts/RealBhopCS2/package/; fi
+          if [ -f artifacts/RealBhopCS2/publish/RealBhopCS2.runtimeconfig.json ]; then cp artifacts/RealBhopCS2/publish/RealBhopCS2.runtimeconfig.json artifacts/RealBhopCS2/package/; fi
+
       - name: Package plugin
         run: |
-          cd artifacts
-          zip -r RealBhopCS2-${{ github.sha }}.zip RealBhopCS2
+          cd artifacts/RealBhopCS2/package
+          zip -r "../../RealBhopCS2-${{ github.sha }}.zip" .
 
       - name: Upload dev build artifact
         if: github.event_name == 'push'
