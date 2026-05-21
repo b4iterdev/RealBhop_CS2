@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - dev
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dev or latest main
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'release' && 'main' || github.ref }}
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore RealBhopCS2.sln
+
+      - name: Build
+        run: dotnet build RealBhopCS2.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test RealBhopCS2.sln --configuration Release --no-build
