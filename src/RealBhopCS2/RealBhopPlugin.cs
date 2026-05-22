@@ -46,10 +46,7 @@ public sealed class RealBhopPlugin : BasePlugin, IPluginConfig<RealBhopConfig>
         RegisterListener<Listeners.OnTick>(OnTick);
         RegisterListener<Listeners.OnClientDisconnect>(OnClientDisconnect);
 
-        AddCommand("css_realbhop_status", "Print RealBhop runtime status.", _commands.Status);
-        AddCommand("css_realbhop_debug", "Toggle RealBhop debug output.", _commands.ToggleDebug);
-        AddCommand("css_realbhop_reload", "Reload RealBhop config from disk.", _commands.Reload);
-        AddCommand("css_realbhop_reset", "Reset RealBhop per-player movement state.", _commands.Reset);
+        AddCommand(RealBhopCommandRouter.CommandName, "RealBhop runtime commands: status, debug, reload, reset.", _commands.Execute);
 
         Console.WriteLine($"{ModuleName} {ModuleVersion} loaded. enabled={_config.Config.Enabled} max_bhop_ticks={_config.Config.MaxBhopTicks} frame_penalty={_config.Config.FramePenalty}");
     }
@@ -61,10 +58,7 @@ public sealed class RealBhopPlugin : BasePlugin, IPluginConfig<RealBhopConfig>
 
         if (_commands is not null)
         {
-            RemoveCommand("css_realbhop_status", _commands.Status);
-            RemoveCommand("css_realbhop_debug", _commands.ToggleDebug);
-            RemoveCommand("css_realbhop_reload", _commands.Reload);
-            RemoveCommand("css_realbhop_reset", _commands.Reset);
+            RemoveCommand(RealBhopCommandRouter.CommandName, _commands.Execute);
         }
 
         Console.WriteLine($"{ModuleName} unloaded.");

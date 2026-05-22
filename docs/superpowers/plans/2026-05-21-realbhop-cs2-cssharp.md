@@ -209,10 +209,10 @@ Expected behavior: server starts, plugin loads, console prints `RealBhopCS2 load
 
 - Create: `Commands/RealBhopCommands.cs`
 
-- [ ] Add `css_realbhop_status`.
-- [ ] Add `css_realbhop_debug`.
-- [ ] Add `css_realbhop_reload`.
-- [ ] Add `css_realbhop_reset`.
+- [ ] Add `css_realbhop status`.
+- [ ] Add `css_realbhop debug`.
+- [ ] Add `css_realbhop reload`.
+- [ ] Add `css_realbhop reset`.
 
 ### Task 9: Add debug diagnostics and running notes
 

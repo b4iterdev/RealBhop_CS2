@@ -111,7 +111,7 @@ addons/counterstrikesharp/plugins/RealBhopCS2
 
 - [ ] **Step 2: Verify plugin loads**
 
-Expected: server console logs `RealBhop CS2 <version> loaded` and `css_realbhop_status` works.
+Expected: server console logs `RealBhop CS2 <version> loaded` and `css_realbhop status` works.
 
 ---
 

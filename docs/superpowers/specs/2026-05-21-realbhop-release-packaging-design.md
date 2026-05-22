@@ -30,7 +30,7 @@ Exclude framework and shared dependency DLLs (e.g., `Microsoft.Extensions.*`, `S
 ## Validation
 - Install the zip into `addons/counterstrikesharp/plugins/RealBhopCS2`.
 - Restart the server.
-- Confirm the plugin loads and the `css_realbhop_status` command works.
+- Confirm the plugin loads and the `css_realbhop status` command works.
 
 ## Risks & Mitigations
 - **Risk:** Missing a required runtime file.

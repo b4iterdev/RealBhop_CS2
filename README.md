@@ -13,7 +13,7 @@ This plugin requires [CounterStrikeSharp](https://github.com/roflmuffin/CounterS
 
 3. Copy the extracted release files into that folder.
 4. Restart the server.
-5. Verify it loaded with `css_realbhop_status` command.
+5. Verify it loaded with `css_realbhop status` command.
 
 To build from source instead of using releases:
 
@@ -28,7 +28,7 @@ Configuration lives in CounterStrikeSharp's plugin config file and defaults mirr
 
 `csgo/addons/counterstrikesharp/configs/plugins/RealBhopCS2/RealBhopCS2.json`
 
-After editing the file, run `css_realbhop_reload` to reload RealBhop settings without recompiling the plugin. The important fields are:
+After editing the file, run `css_realbhop reload` to reload RealBhop settings without recompiling the plugin. The important fields are:
 
 - `Enabled` — master on/off switch.
 - `MaxBhopTicks` — max ground ticks after landing where correction can still apply (sm_realbhop’s maxbhopframes).
@@ -44,10 +44,10 @@ After editing the file, run `css_realbhop_reload` to reload RealBhop settings wi
 
 Runtime commands:
 
-- `css_realbhop_status` — print the loaded runtime settings and tracked-player count.
-- `css_realbhop_reload` — reload settings from the CounterStrikeSharp config file.
-- `css_realbhop_debug` — temporarily toggle debug output in memory. This command does **not** update the config file.
-- `css_realbhop_reset` — reset per-player movement tracking state.
+- `css_realbhop status` — print the loaded runtime settings and tracked-player count.
+- `css_realbhop reload` — reload settings from the CounterStrikeSharp config file.
+- `css_realbhop debug` — temporarily toggle debug output in memory. This command does **not** update the config file.
+- `css_realbhop reset` — reset per-player movement tracking state.
 
 # How does it work ?
 This plugin mirrors sm_realbhop’s HL1/Quake-style speed preservation. It records the last air-frame velocity before landing, then on the second air frame after a short ground touch it applies a correction toward that speed. Late jumps receive a penalty via `FramePenalty`, and after `MaxBhopTicks` no correction is applied.
