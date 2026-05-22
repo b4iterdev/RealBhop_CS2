@@ -4,7 +4,7 @@
 
 **Goal:** Add CounterStrikeSharp-native external config support, a runtime reload command, and temporary in-memory debug toggling.
 
-**Architecture:** `RealBhopConfig` becomes a `BasePluginConfig`, and `RealBhopPlugin` implements `IPluginConfig<RealBhopConfig>`. A small runtime state object owns the temporary debug override so file-backed `Debug` values are not mutated by `css_realbhop_debug`.
+**Architecture:** `RealBhopConfig` becomes a `BasePluginConfig`, and `RealBhopPlugin` implements `IPluginConfig<RealBhopConfig>`. A small runtime state object owns the temporary debug override so file-backed `Debug` values are not mutated by `css_realbhop debug`.
 
 **Tech Stack:** .NET 8, CounterStrikeSharp API, xUnit.
 
@@ -43,8 +43,8 @@
 - [ ] Implement `IPluginConfig<RealBhopConfig>` in `RealBhopPlugin`.
 - [ ] Use `OnConfigParsed` to initialize runtime config before `Load`.
 - [ ] Pass runtime config to commands and effective file config to tracker/movement.
-- [ ] Add `css_realbhop_reload` command that calls CounterStrikeSharp `Config.Reload()` and preserves temporary debug override.
-- [ ] Keep `css_realbhop_debug` temporary and never call `Config.Update()`.
+- [ ] Add `css_realbhop reload` command that calls CounterStrikeSharp `Config.Reload()` and preserves temporary debug override.
+- [ ] Keep `css_realbhop debug` temporary and never call `Config.Update()`.
 
 ### Task 3: Update status formatting and docs
 
@@ -55,7 +55,7 @@
 
 - [ ] Update status output to include effective debug and config debug.
 - [ ] Update formatter test assertions.
-- [ ] Document config path, `css_realbhop_reload`, and temporary `css_realbhop_debug` behavior.
+- [ ] Document config path, `css_realbhop reload`, and temporary `css_realbhop debug` behavior.
 
 ### Task 4: Verify
 

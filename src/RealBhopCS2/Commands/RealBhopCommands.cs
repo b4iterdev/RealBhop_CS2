@@ -19,6 +19,29 @@ public sealed class RealBhopCommands
         _reloadConfig = reloadConfig;
     }
 
+    public void Execute(CCSPlayerController? player, CommandInfo command)
+    {
+        switch (RealBhopCommandRouter.Parse(command.GetArg(1)))
+        {
+            case RealBhopCommandAction.Status:
+                Status(player, command);
+                break;
+            case RealBhopCommandAction.Debug:
+                ToggleDebug(player, command);
+                break;
+            case RealBhopCommandAction.Reload:
+                Reload(player, command);
+                break;
+            case RealBhopCommandAction.Reset:
+                Reset(player, command);
+                break;
+            case RealBhopCommandAction.Help:
+            default:
+                Help(command);
+                break;
+        }
+    }
+
     public void Status(CCSPlayerController? player, CommandInfo command)
     {
         command.ReplyToCommand(RealBhopDebugFormatter.FormatStatus(_config, _states.Count));
@@ -65,5 +88,10 @@ public sealed class RealBhopCommands
 
         _states.ResetAll();
         command.ReplyToCommand("RealBhop state reset.");
+    }
+
+    private static void Help(CommandInfo command)
+    {
+        command.ReplyToCommand("Usage: css_realbhop <status|debug|reload|reset>");
     }
 }
