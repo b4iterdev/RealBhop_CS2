@@ -1,9 +1,15 @@
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Utils;
 
 namespace RealBhopCS2.Movement;
 
 public sealed class PlayerVelocityApplier
 {
+    public static Vector BuildBaseVelocityCorrection(MovementVector currentVelocity, MovementVector correction)
+    {
+        return new Vector(correction.X, correction.Y, correction.Z);
+    }
+
     public bool TryApply(CCSPlayerController controller, MovementSnapshot snapshot, MovementVector correction)
     {
         if (!controller.IsValid || !IsFinite(correction))
@@ -17,12 +23,11 @@ public sealed class PlayerVelocityApplier
             return false;
         }
 
-        var velocity = new System.Numerics.Vector3(
-            snapshot.Velocity.X + correction.X,
-            snapshot.Velocity.Y + correction.Y,
-            snapshot.Velocity.Z);
+        var baseVelocity = BuildBaseVelocityCorrection(snapshot.Velocity, correction);
 
-        pawn.Teleport(null, null, velocity);
+        pawn.BaseVelocity.X = baseVelocity.X;
+        pawn.BaseVelocity.Y = baseVelocity.Y;
+        pawn.BaseVelocity.Z = baseVelocity.Z;
         return true;
     }
 
