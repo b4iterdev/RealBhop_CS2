@@ -43,7 +43,7 @@ public sealed class RealBhopPlugin : BasePlugin, IPluginConfig<RealBhopConfig>
         _velocityApplier = new PlayerVelocityApplier();
         _commands = new RealBhopCommands(_config, _states, ReloadConfig);
 
-        RegisterListener<Listeners.OnTick>(OnTick);
+        RegisterListener<Listeners.OnServerPreEntityThink>(RunCorrectionLoop);
         RegisterListener<Listeners.OnClientDisconnect>(OnClientDisconnect);
 
         AddCommand(RealBhopCommandRouter.CommandName, "RealBhop runtime commands: status, debug, reload, reset.", _commands.Execute);
@@ -53,7 +53,7 @@ public sealed class RealBhopPlugin : BasePlugin, IPluginConfig<RealBhopConfig>
 
     public override void Unload(bool hotReload)
     {
-        RemoveListener<Listeners.OnTick>(OnTick);
+        RemoveListener<Listeners.OnServerPreEntityThink>(RunCorrectionLoop);
         RemoveListener<Listeners.OnClientDisconnect>(OnClientDisconnect);
 
         if (_commands is not null)
@@ -64,7 +64,7 @@ public sealed class RealBhopPlugin : BasePlugin, IPluginConfig<RealBhopConfig>
         Console.WriteLine($"{ModuleName} unloaded.");
     }
 
-    private void OnTick()
+    private void RunCorrectionLoop()
     {
         foreach (var player in _movementReader.GetPlayers())
         {
